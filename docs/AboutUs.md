@@ -17,12 +17,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Responsibilities: Implementation, testing
 
 [[github](https://github.com/yongqinglim)]
-### Jean Doe
 
-<img src="images/johndoe.png" width="200px">
+### Tran Gia Huy
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/unknown15082.png" width="200px">
+
+[[github](http://github.com/Unknown15082)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
