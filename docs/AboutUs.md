@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Yongqing Lim
 
-<img src="images/yongqinglim.png" width="200px">
+<img src="images/lyq1375560.png" width="200px">
 
 * Role: Developer
 * Responsibilities: Implementation, testing
