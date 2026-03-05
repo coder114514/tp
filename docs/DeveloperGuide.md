@@ -331,6 +331,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Customer**: A person whose contact information and order details are stored in ClientEase
+* **Order Deadline**: The date by which a customer's order needs to be completed
+* **Location**: The address or place associated with a customer, which may represent their delivery location or self-collection point
+
 
 --------------------------------------------------------------------------------------------------------------------
 
