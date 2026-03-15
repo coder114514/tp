@@ -39,7 +39,7 @@ public class DeleteCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (lastShownList.isEmpty()) {
-            throw new CommandException("Error: Customer list is empty.");
+            throw new CommandException(Messages.MESSAGE_EMPTY_CUSTOMER_LIST);
         }
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
