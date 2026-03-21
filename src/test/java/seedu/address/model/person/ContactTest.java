@@ -57,4 +57,11 @@ public class ContactTest {
         // different values -> returns false
         assertFalse(contact.equals(new Contact("91234567")));
     }
+
+    @Test
+    public void equals_emailCaseInsensitive() {
+        Contact contact = new Contact("John@Example.com");
+
+        assertTrue(contact.equals(new Contact("john@example.com")));
+    }
 }
