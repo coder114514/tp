@@ -57,34 +57,22 @@ public class AddCommandParser implements Parser<AddCommand> {
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Products products = Products.empty(); // defaults when products are missing
         if (argMultimap.getValue(PREFIX_PRODUCTS).isPresent()) {
-            String rawProducts = argMultimap.getValue(PREFIX_PRODUCTS).get();
-            products = rawProducts.trim().isEmpty()
-                    ? Products.empty()
-                    : ParserUtil.parseProducts(rawProducts); // parse products input
+            products = ParserUtil.parseOptionalProducts(argMultimap.getValue(PREFIX_PRODUCTS).get());
         }
 
         Location location = Location.empty(); // defaults when location is missing
         if (argMultimap.getValue(PREFIX_LOCATION).isPresent()) {
-            String rawLocation = argMultimap.getValue(PREFIX_LOCATION).get();
-            location = rawLocation.trim().isEmpty()
-                    ? Location.empty()
-                    : ParserUtil.parseLocation(rawLocation); // parse location input
+            location = ParserUtil.parseOptionalLocation(argMultimap.getValue(PREFIX_LOCATION).get());
         }
 
         Deadline deadline = Deadline.empty(); // defaults to no deadline when missing
         if (argMultimap.getValue(PREFIX_DEADLINE).isPresent()) {
-            String rawDeadline = argMultimap.getValue(PREFIX_DEADLINE).get();
-            deadline = rawDeadline.trim().isEmpty()
-                    ? Deadline.empty()
-                    : ParserUtil.parseDeadline(rawDeadline); // parse deadline input
+            deadline = ParserUtil.parseOptionalDeadline(argMultimap.getValue(PREFIX_DEADLINE).get());
         }
 
         Contact contact = Contact.empty(); // defaults when contact is missing
         if (argMultimap.getValue(PREFIX_CONTACT).isPresent()) {
-            String rawContact = argMultimap.getValue(PREFIX_CONTACT).get();
-            contact = rawContact.trim().isEmpty()
-                    ? Contact.empty()
-                    : ParserUtil.parseContact(rawContact); // parse contact input
+            contact = ParserUtil.parseOptionalContact(argMultimap.getValue(PREFIX_CONTACT).get());
         }
 
         Person person = new Person(name, products, location, deadline, contact); // creates new customer object

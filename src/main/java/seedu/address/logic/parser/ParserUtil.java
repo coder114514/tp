@@ -144,6 +144,38 @@ public class ParserUtil {
     }
 
     /**
+     * Returns a {@code Products} parsed from the given {@code String}, or an empty products list if blank.
+     */
+    public static Products parseOptionalProducts(String products) throws ParseException {
+        requireNonNull(products);
+        return products.trim().isEmpty() ? Products.empty() : parseProducts(products);
+    }
+
+    /**
+     * Returns a {@code Location} parsed from the given {@code String}, or an empty location if blank.
+     */
+    public static Location parseOptionalLocation(String location) throws ParseException {
+        requireNonNull(location);
+        return location.trim().isEmpty() ? Location.empty() : parseLocation(location);
+    }
+
+    /**
+     * Returns a {@code Deadline} parsed from the given {@code String}, or an empty deadline if blank.
+     */
+    public static Deadline parseOptionalDeadline(String deadline) throws ParseException {
+        requireNonNull(deadline);
+        return deadline.trim().isEmpty() ? Deadline.empty() : parseDeadline(deadline);
+    }
+
+    /**
+     * Returns a {@code Contact} parsed from the given {@code String}, or an empty contact if blank.
+     */
+    public static Contact parseOptionalContact(String contact) throws ParseException {
+        requireNonNull(contact);
+        return contact.trim().isEmpty() ? Contact.empty() : parseContact(contact);
+    }
+
+    /**
      * Returns a {@code Tag} parsed from the given {@code String}.
      * Leading and trailing whitespaces will be trimmed.
      *

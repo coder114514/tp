@@ -12,10 +12,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Contact;
-import seedu.address.model.person.Deadline;
-import seedu.address.model.person.Location;
-import seedu.address.model.person.Products;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -48,28 +44,20 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_PRODUCTS).isPresent()) {
-            String rawProducts = argMultimap.getValue(PREFIX_PRODUCTS).get();
-            editPersonDescriptor.setProducts(rawProducts.trim().isEmpty()
-                    ? Products.empty()
-                    : ParserUtil.parseProducts(rawProducts));
+            editPersonDescriptor.setProducts(ParserUtil.parseOptionalProducts(
+                    argMultimap.getValue(PREFIX_PRODUCTS).get()));
         }
         if (argMultimap.getValue(PREFIX_LOCATION).isPresent()) {
-            String rawLocation = argMultimap.getValue(PREFIX_LOCATION).get();
-            editPersonDescriptor.setLocation(rawLocation.trim().isEmpty()
-                    ? Location.empty()
-                    : ParserUtil.parseLocation(rawLocation));
+            editPersonDescriptor.setLocation(ParserUtil.parseOptionalLocation(
+                    argMultimap.getValue(PREFIX_LOCATION).get()));
         }
         if (argMultimap.getValue(PREFIX_DEADLINE).isPresent()) {
-            String rawDeadline = argMultimap.getValue(PREFIX_DEADLINE).get();
-            editPersonDescriptor.setDeadline(rawDeadline.trim().isEmpty()
-                    ? Deadline.empty()
-                    : ParserUtil.parseDeadline(rawDeadline));
+            editPersonDescriptor.setDeadline(ParserUtil.parseOptionalDeadline(
+                    argMultimap.getValue(PREFIX_DEADLINE).get()));
         }
         if (argMultimap.getValue(PREFIX_CONTACT).isPresent()) {
-            String rawContact = argMultimap.getValue(PREFIX_CONTACT).get();
-            editPersonDescriptor.setContact(rawContact.trim().isEmpty()
-                    ? Contact.empty()
-                    : ParserUtil.parseContact(rawContact));
+            editPersonDescriptor.setContact(ParserUtil.parseOptionalContact(
+                    argMultimap.getValue(PREFIX_CONTACT).get()));
         }
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
