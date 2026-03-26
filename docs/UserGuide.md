@@ -99,7 +99,7 @@ This guide assumes you are comfortable with:
 
 ### Overview of the Interface
 
-![Ui](images/UIScreenshot.png)
+![Ui](images/Ui.png)
 
 | Area | Purpose |
 |---|---|
