@@ -67,7 +67,7 @@ public class DeleteCommand extends Command {
             assert targetName == null : "Only one of targetIndex or targetName should be set";
 
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_CUSTOMER_INDEX);
             }
 
             logger.info("Deleting person by index: " + targetIndex);
