@@ -53,7 +53,7 @@ public class FindCommand extends Command {
         model.updateFilteredPersonList(predicate);
         logger.info(model.getFilteredPersonList().size() + " customers found.");
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_CUSTOMERS_FOUND_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
     @Override

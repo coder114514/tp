@@ -82,7 +82,7 @@ This guide assumes you are comfortable with:
    > **Mac users:** Ensure you have the precise JDK version prescribed
    > [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-2. Download the latest **`clientease.jar`** file from the
+2. Download the latest **`ClientEase.jar`** file from the
    [releases page here](https://github.com/AY2526S2-CS2103T-T12-2/tp/releases).
 
 3. Move the file to a folder you want to use as your **home folder** (e.g., `~/ClientEase/`).
@@ -94,7 +94,7 @@ This guide assumes you are comfortable with:
 
 5. Run the application:
    ```
-   java -jar clientease.jar
+   java -jar ClientEase.jar
    ```
 
    ClientEase will launch with a set of sample customer data so you can explore right away.
