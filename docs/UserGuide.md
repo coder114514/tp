@@ -32,7 +32,8 @@ Instead of clicking through multiple menus, ClientEase lets you type short comma
 3. [Understanding Command Format](#3-understanding-command-format)
    - [3.1 Notation Conventions](#31-notation-conventions)
    - [3.2 Parameter Reference (Full and Short Prefixes)](#32-parameter-reference-full-and-short-prefixes)
-   - [3.3 Your First Commands](#33-your-first-commands)
+   - [3.3 Data Normalisation](#33-data-normalisation)
+   - [3.4 Your First Commands](#34-your-first-commands)
 4. [Managing Products](#4-managing-products)
    - [4.1 Add a Product](#41-add-a-product)
    - [4.2 Delete a Product](#42-delete-a-product)
@@ -235,7 +236,24 @@ Every parameter has a **full prefix** (easier to remember) and a **short prefix*
 - If a prefix is provided with no value (e.g. `products/`), the field is treated as empty.
 - Non-ASCII characters (e.g. Chinese characters) are rejected in `name/` and `contact/`.
 
-### 3.3 Your First Commands
+### 3.3 Data Normalisation
+
+To keep stored data consistent and reduce accidental duplicates, ClientEase normalises some input before saving it.
+
+#### Contact Numbers
+
+- Spaces, hyphens, and parentheses are removed from phone numbers before they are stored.
+- Example: `+65 9123 4567` is stored internally as `+6591234567`.
+
+#### Search Behavior
+
+- The `find` command matches against the normalised stored value.
+- When searching by contact number, omit spaces in your search term.
+- Example: use `find c/+6591234567` instead of `find c/+65 9123 4567`.
+
+> ⚠️ **IMPORTANT:** Always remove spaces when searching for contact numbers. ClientEase stores phone numbers in a condensed format to keep data consistent.
+
+### 3.4 Your First Commands
 
 Try each command below by typing it into the **Command Box** and pressing **Enter**.
 
@@ -252,6 +270,8 @@ list
 ```
 add name/Jane Tan contact/91234567;jane@mybusiness.com products/Chocolate Cake:2, Muffin:5 location/Tampines deadline/2025-12-31
 ```
+
+> 📝 **NOTE:** Enter the entire command as a single line in the application. The text may wrap visually inside this guide, but do not press Enter until the full command has been typed.
 
 **Expected output:** Added Customer: Jane Tan
 
@@ -482,10 +502,6 @@ list
 
 **Expected output:** All customers are displayed in the Customer List Panel. The Result Display shows the total number of customers listed.
 
-![Customer List Panel showing all customers with their details and priority badges](images/list.png)
-
-*Figure 5: Customer List Panel showing all customers with their details and priority badges*
-
 > 💡 **TIP:** Use `list` after a `find` command to return to the full customer list.
 
 ### 5.4 Edit a Customer
@@ -575,7 +591,7 @@ At least one field must be provided. Fields can be repeated multiple times.
 |-------|-----------|---------|
 | Name | Full word match | Case-insensitive. `Han` will **not** match "Hans", but `Hans` will. |
 | Product | Full word match | Case-insensitive. Matches product names assigned to customers. |
-| Contact | Substring match | `123` will match "1234@mail.com". |
+| Contact | Substring match | Matches against the normalised stored value. `123` will match "1234@mail.com". When searching phone numbers, omit spaces. |
 | Location | Substring match | `Clem` will match "Clementi Ave 2". |
 
 > 📝 **NOTE:** Searching multiple values within the same category (e.g. two names) returns results matching **any** of them. Searching across different categories (e.g. a name and a product) returns results matching **at least one from each** category.
@@ -623,6 +639,22 @@ find l/Bishan
 ```
 
 **Expected output:** Customers whose location contains "Bishan" are shown.
+
+#### Example 4: Find by contact number
+
+Correct:
+
+```
+find c/+6591234567
+```
+
+Incorrect:
+
+```
+find c/+65 9123 4567
+```
+
+**Expected output:** The first command can match a customer stored with that phone number. The second will return no results because phone-number searches use the normalised format without spaces.
 
 ![Finding customers - typing the find command](images/find1.png)
 ![Finding customers - filtered results](images/find2.png)
