@@ -145,6 +145,9 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PRODUCTS_DESC + LOCATION_DESC_BOB + DEADLINE_DESC_BOB
                 + CONTACT_DESC_BOB, Products.MESSAGE_CONSTRAINTS);
 
+        // missing product name
+        assertParseFailure(parser, " n/tom p/ :33", Products.MESSAGE_EMPTY_PRODUCT_NAME);
+
         // invalid location (blank values are allowed)
 
         // invalid deadline

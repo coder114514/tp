@@ -70,6 +70,12 @@ public class ParserUtil {
     public static Products parseProducts(String products) throws ParseException {
         requireNonNull(products);
         String trimmedProducts = products.trim();
+        for (String part : trimmedProducts.split(",")) {
+            String[] pair = part.trim().split(":", 2);
+            if (pair[0].trim().isEmpty()) {
+                throw new ParseException(Products.MESSAGE_EMPTY_PRODUCT_NAME);
+            }
+        }
         if (!Products.isValidProducts(trimmedProducts)) {
             throw new ParseException(Products.MESSAGE_CONSTRAINTS);
         }
