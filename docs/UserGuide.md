@@ -247,7 +247,7 @@ add name/NAME [products/PRODUCTS] [location/LOCATION] [deadline/DEADLINE] [conta
 | `name/NAME` | Yes | • 1-100 characters after trimming and space normalisation.<br>• Names may contain only ASCII letters (A-Z) and spaces.<br>• Special characters ( . ' - ) are permitted, but the name must include at least one letter.<br>• Names are unique case-insensitively and with repeated spaces collapsed. |
 | `products/PRODUCTS` | No | • Comma-separated list of product names from the product catalogue.<br>• No fixed limit on the number of product names, but quantities must not exceed 10,000 per product or 100,000 in total.<br>• Items can optionally include a quantity using a colon (e.g., Muffin:3); if omitted, quantity defaults to 1.<br>• Quantities must be positive integers, so `0` is not accepted.<br>• Matching is case-insensitive and spaces are normalised.<br>• Empty items are invalid.<br>• Duplicate product names are allowed and their quantities are summed.<br>• Use `product add` to create products before referencing them. |
 | `location/LOCATION` | No | • Non-blank after trimming.<br>• Maximum length 200 characters. |
-| `deadline/DEADLINE` | No | • Accepted formats: `yyyy-MM-dd HH:mm`, `yyyy-MM-dd`, `dd/MM/yyyy` (24-hour time).<br>• Entries without a time default to **23:59**. |
+| `deadline/DEADLINE` | No | • Accepted formats: `yyyy-MM-dd HH:mm`, `yyyy-MM-dd`, `dd/MM/yyyy` (24-hour time).<br>• Entries without a time default to **23:59**.<br>• Invalid dates (e.g., 2027-02-29) are rejected. |
 | `contact/CONTACT` | No | • Semicolon-separated entries.<br>• Each entry must be either an 8-digit local phone number or an international phone in `+<2-3 digit country code><1-12 digit number>` format; spaces in phone numbers are ignored.<br>• Emails are up to 100 characters, must start with an alphanumeric character, contain only letters, digits, dots, and hyphens, and contain exactly one `@` with an alphanumeric at the start of the domain.<br>• Entries are stored with phone spaces removed and emails lowercased, then sorted.<br>• Empty entries (e.g. trailing or double `;`) are invalid. |
 
 > **Important:** ClientEase automatically tags customers with a priority colour based on the **total quantity** of products.
@@ -385,7 +385,7 @@ find [name/NAME]...[contact/CONTACT]...[location/LOCATION]...[product/PRODUCT]..
 Short prefixes are supported: `n/` for `name/`, `c/` for `contact/`, `l/` for `location/`, and `p/` for `product/`.
 
 - `NAME` and `PRODUCT` are single words, `CONTACT` and `LOCATION` are strings. Each field can repeat multiple times.
-- At least one field should be provided. Empty values are ignored.
+- At least one field prefix must be provided. Empty values are ignored; if all provided fields are empty (e.g. `find n/`), no customers will be matched.
 - The search is case-insensitive. e.g. `hans` will match `Hans`.
 - The name, contact, location, and product list of each customer will be searched.
 - For name and products, only full words will be matched. e.g. `Han` will not match `Hans`.
