@@ -469,57 +469,145 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    2. Double-click the jar file.<br>
+      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+    2. Re-launch the app by double-clicking the jar file.<br>
+      Expected: The most recent window size and location is retained.
 
+3. Shutdown
+
+    1. Run `list` command. Take note of the number of customers.
+
+    2. Run `exit` command.<br>
+       Expected: A message is shown: `Goodbye! Exiting ClientEase. You have X customer(s) saved.`. `X` is the number of customers.
+
+### Adding a customer
+
+1. Adding a customer while all customers are being shown
+
+    1. Prerequisites: List all customers using the `list` command. Multiple customers in the list.
+
+    2. Test case: `add name/John Doe contact/98765432;johnd@example.com products/Muffin:3 location/Clementi Ave 2 deadline/2026-12-31`<br>
+       Expected: A new customer is added with the given details. Customer is given a Low priority badge, with a green color. Customer name is shown in the status message.
+
+    3. Test case: `add name/John Doe`<br>
+       Expected: No customer is added, as the customer already exists. Error details shown in the status message.
+
+    4. Test case: `add n/John Smith`<br>
+       Expected: A customer is added with name `John Smith`, with no other details. No priority badge is shown, and the color is gray.
+
+    5. Test case: `add name/Tommy contact/987`<br>
+       Expected: No customer is added. Error details shown in the status message.
 
 ### Deleting a customer
 
 1. Deleting a customer by index (full list)
 
-   1. Prerequisites: List all customers using the `list` command. Multiple customers in the list.
+    1. Prerequisites: List all customers using the `list` command. Multiple customers in the list.
 
-   2. Test case: delete 1  
+    2. Test case: `delete 1`<br>
       Expected: First customer is deleted from the list. Details of the deleted customer shown in the status message. Timestamp in the status bar is updated.
 
-   3. Test case: delete 0  
+    3. Test case: `delete 0`<br>
       Expected: No customer is deleted. Error details shown in the status message. Status bar remains the same.
-
-   4. Other incorrect delete commands to try: delete, delete x, delete 999 (where x is not a number or index is out of range)  
+      
+    4. Other incorrect delete commands to try: delete, delete x, delete 999 (where x is not a number or index is out of range)
       Expected: Similar to previous.
 
 2. Deleting a customer by name
 
     1. Prerequisites: List all customers using the `list` command. At least one customer exists.
 
-    2. Test case: delete John Doe  
+    2. Test case: `delete John Doe`
        Expected: The customer with name John Doe is deleted. Details of the deleted customer shown in the status message. Timestamp in the status bar is updated.
 
-    3. Test case: delete NONEXISTENTNAME
+    3. Test case: `delete NONEXISTENTNAME`
        Expected: No customer is deleted. Error details shown in the status message. Status bar remains the same.
 
 3. Deleting after filtering
 
     1. Prerequisites: Use `find name/John` to filter customers.
 
-    2. Test case: delete John Doe  
+    2. Test case: `delete John Doe`
        Expected: The customer with name John Doe is deleted. Details of the deleted customer shown in the status message. Timestamp in the status bar is updated.
 
-    3. Test case: delete 1
+    3. Test case: `delete 1`
        Expected: First customer is deleted from the list. Details of the deleted customer shown in the status message. Timestamp in the status bar is updated.
 
 
+### Managing Products
+
+1. Adding a product to the catalogue
+
+    1. Test case: `product add product/Apple Pie`<br>
+      Expected: `Apple Pie` is added to the product catalogue. Status message confirms the addition.
+
+    2. Test case: `product add product/Apple Pie` (duplicate)<br>
+      Expected: No product is added. Error message indicating that the product already exists in the catalogue.
+
+    3. Test case: `product add product/` (blank name)<br>
+      Expected: No product is added. Error message is shown in the status message.
+
+    4. Test case: `product add product/Cake,Special` (name containing `,`)<br>
+      Expected: No product is added. Error message indicating that `,` and `:` are not allowed in product names.
+
+2. Listing products in the catalogue
+
+    1. Test case: `product list`<br>
+    Expected: All products in the catalogue are displayed in alphabetical order in the status message. If the catalogue is empty, a message indicating no products are available is shown.
+
+3. Deleting a product from the catalogue
+
+    1. Prerequisites: The product catalogue contains `Muffin`, and no customer currently has `Muffin` in their product list.
+
+    2. Test case: `product delete product/Muffin`<br>
+    Expected: `Muffin` is removed from the product catalogue. Status message confirms the deletion.
+
+    3. Test case: `product delete product/Muffin` when a customer is currently using `Muffin`<br>
+    Expected: No product is deleted. Error message indicating that the product is in use and cannot be removed.
+
+    4. Test case: `product delete product/NonExistent`<br>
+    Expected: No product is deleted. Error message indicating that the product does not exist in the catalogue.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Close the app if it is running.
+
+    2. Navigate to `[JAR file location]/data/`, where `[JAR file location]` is the location of the `ClientEase.jar` file.
+
+    3. Delete the `addressbook.json` file.
+
+    4. Re-launch the app.<br>
+       Expected: The app starts with the default sample customer data.
+
+    5. Run the `exit` command to exit the app.<br>
+       Expected: A new `addressbook.json` file is created in the `data/` directory.
+
+2. Dealing with corrupted data files
+
+    1. Close the app if it is running.
+
+    2. Navigate to `[JAR file location]/data/`, where `[JAR file location]` is the location of the `ClientEase.jar` file.
+
+    3. Corrupt the `addressbook.json` file by introducing an invalid edit.
+
+    4. Re-launch the app.<br>
+       Expected: The app detects the invalid data file, and starts with an empty customer list.
+
+    5. Execute any command that modifies data, for example, adding a new customer.<br>
+       Expected: The `addressbook.json` file is overwritten with the new valid data.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** To simplify the process of testing commands such as `clear`, testers can back up the data files in the `data/` directory.
+
+After executing the command and checking the result, testers can restore the data file by restoring the backed up data file. This helps testers avoid re-adding customer data multiple times.
+</div>
+
