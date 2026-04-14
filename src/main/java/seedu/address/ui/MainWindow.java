@@ -69,6 +69,12 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        // Show the exit message when the X button is clicked
+        primaryStage.setOnCloseRequest(event -> {
+            event.consume();
+            handleExit();
+        });
     }
 
     public Stage getPrimaryStage() {
