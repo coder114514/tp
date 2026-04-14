@@ -86,10 +86,9 @@ This guide assumes you are comfortable with:
    ```
    java -version
    ```
-   If Java is not installed or the version is below 17, expand the section for your operating system below:
+   If Java is not installed or the version is below 17, follow the instructions for your operating system below:
 
-   <details>
-   <summary>🪟 Windows</summary>
+   **🪟 Windows**
 
    Download and install [Java 17 for Windows](https://www.oracle.com/java/technologies/downloads/#java17-windows) from Oracle.
    After installing, open **Command Prompt** (`Win + R`, type `cmd`, press Enter) and verify with:
@@ -97,17 +96,13 @@ This guide assumes you are comfortable with:
    java -version
    ```
 
-   </details>
 
-   <details>
-   <summary>🍎 macOS</summary>
+   **🍎 macOS**
 
    Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-   </details>
 
-   <details>
-   <summary>🐧 Linux</summary>
+   **🐧 Linux**
 
    Install Java 17 using your package manager. For example, on Ubuntu or Debian:
    ```
@@ -115,7 +110,6 @@ This guide assumes you are comfortable with:
    ```
    Then verify with `java -version`.
 
-   </details>
 
 2. Download the latest **`ClientEase.jar`** file from the
    [releases page here](https://github.com/AY2526S2-CS2103T-T12-2/tp/releases).
@@ -124,25 +118,21 @@ This guide assumes you are comfortable with:
 
 4. Open a terminal and navigate to that folder:
 
-   <details>
-   <summary>🪟 Windows</summary>
+   **🪟 Windows**
 
    Open **Command Prompt** and run (replace the path with your actual folder location):
    ```
    cd C:\Users\YourName\ClientEase
    ```
 
-   </details>
 
-   <details>
-   <summary>🍎 macOS / 🐧 Linux</summary>
+   **🍎 macOS / 🐧 Linux**
 
    Open **Terminal** and run:
    ```
    cd ~/ClientEase
    ```
 
-   </details>
 
 5. Run the application:
    ```
