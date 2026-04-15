@@ -40,7 +40,7 @@ do those updates in seconds with short commands, without switching between multi
     - [Listing All Customers : `list`](#listing-all-customers--list)
     - [Managing Products : `product`](#managing-products--product)
     - [Editing a Customer : `edit`](#editing-a-customer--edit)
-    - [Locating Customers : `find`](#locating-customers--find)
+    - [Finding Customers : `find`](#finding-customers--find)
     - [Deleting a Customer : `delete`](#deleting-a-customer--delete)
     - [Clearing All Customers : `clear`](#clearing-all-customers--clear)
     - [Exiting the App : `exit`](#exiting-the-app--exit)
